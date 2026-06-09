@@ -1,0 +1,9 @@
+{
+	"$schema": "https://raw.githubusercontent.com/SteamClientHomebrew/Millennium/refs/heads/main/src/system/plugin-schema.json",
+	"name": "__uwp_library_sync__",
+	"common_name": "UWP & XBOX Library Sync",
+	"description": "Allows you to automatically add your UWP & XBOX (app) games to Steam.",
+	"backendType": "lua",
+	"useBackend": true,
+	"version": "0.0.1"
+}

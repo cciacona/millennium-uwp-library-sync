@@ -35,6 +35,10 @@ Once installed, most things work out of the box - but you can enable/disable thi
 - Icon loading uses the original asset paths from the app package. If an asset is missing or unreadable, the plugin falls back to an empty icon.
 - Some UWP games may not launch if they depend on specific command‑line arguments - the plugin launches them via their `AppUserModelId` only.
 
+## Planned Features
+- Add support for deeper asset scraping for games and apps, and optionally fall back to something like griddb
+- Find a better way to handle launching UWP apps so we can get a "more real" appId to use for stuff like assets etc, maybe even play with something that allows us to throw in steam overlay dlls, but without requiring us to ship signed bins
+
 ### What gets synced?
 
 The plugin adds a shortcut for every UWP app that:

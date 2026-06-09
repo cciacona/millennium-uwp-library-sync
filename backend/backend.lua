@@ -49,17 +49,6 @@ local function get_settings_state_internal()
     local ids = steam_user.current_steam_user_ids()
     local disabled_shortcuts = config.get_disabled_shortcuts()
     local managed_shortcuts = get_managed_shortcuts_internal()
-    logger:info(
-        "Getting settings state for current Steam user: steamid64=" .. ids.steamid64 ..
-        ", steam3=" .. ids.steam3 ..
-        ", account=" .. tostring(ids.account_name) ..
-        ", persona=" .. tostring(ids.persona_name)
-    )
-    logger:info("Default disablelist enabled: " .. tostring(config.get_default_disablelist_enabled()))
-    logger:info("Auto resync on startup: " .. tostring(config.get_auto_resync_on_startup()))
-    logger:info("Disabled shortcuts: " .. table.concat(disabled_shortcuts, ", "))
-    logger:info("Managed shortcuts count: " .. tostring(#managed_shortcuts))
-    logger:info("Last sync at: " .. tostring(config.get_last_sync_at()))
     return {
         current_user = {
             steamid64 = ids.steamid64,

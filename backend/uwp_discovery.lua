@@ -1,4 +1,3 @@
-local logger = require("logger")
 local fs = require("fs")
 local utils = require("utils")
 local cjson = require("json")

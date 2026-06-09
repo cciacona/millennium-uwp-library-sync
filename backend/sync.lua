@@ -47,18 +47,9 @@ local function write_shortcuts_bytes(path, bytes)
 end
 
 local function sync_uwp_games_to_steam_internal()
-    logger:info("sync stage 1: resolve current steam user")
-    local ids = steam_user.current_steam_user_ids()
-    logger:info(
-        "Current Steam user: steamid64=" .. ids.steamid64 ..
-        ", steam3=" .. ids.steam3 ..
-        ", account=" .. tostring(ids.account_name) ..
-        ", persona=" .. tostring(ids.persona_name)
-    )
 
-    logger:info("sync stage 2: discover uwp games")
     local games = uwp_discovery.powershell_discover_games()
-    logger:info("sync stage 2 done, discovered count=" .. tostring(games and #games or 0))
+    logger:info("discovered count=" .. tostring(games and #games or 0))
     millennium.config.set("uwp_snapshot", games)
     if not games or #games == 0 then
         local now = helpers.current_timestamp_iso8601()
@@ -72,18 +63,15 @@ local function sync_uwp_games_to_steam_internal()
         }
     end
 
-    logger:info("sync stage 3: resolve shortcuts path")
     local path = shortcuts_vdf_path()
     logger:info("Using shortcuts.vdf: " .. path)
 
-    logger:info("sync stage 4: parse shortcuts.vdf")
     local doc = vdf.parse_shortcuts_vdf(path)
     logger:info("Parsed shortcuts.vdf entries: " .. tostring(#(doc.shortcuts or {})))
 
-    logger:info("sync stage 5: merge games")
     local changed
     changed, doc = uwp_discovery.merge_games(doc, games)
-    logger:info("sync stage 5 done, changed=" .. tostring(changed))
+    logger:info("changed=" .. tostring(changed))
 
     if not changed then
         local now = helpers.current_timestamp_iso8601()
@@ -97,14 +85,11 @@ local function sync_uwp_games_to_steam_internal()
         }
     end
 
-    logger:info("sync stage 6: serialize shortcuts")
     logger:info("Shortcuts to write: " .. tostring(#(doc.shortcuts or {})))
     local bytes = vdf.serialize_shortcuts_vdf(doc)
-    logger:info("sync stage 6 done, bytes=" .. tostring(#bytes))
+    logger:info("bytes=" .. tostring(#bytes))
 
-    logger:info("sync stage 7: write shortcuts")
     write_shortcuts_bytes(path, bytes)
-    logger:info("sync stage 7 done")
 
     local now = helpers.current_timestamp_iso8601()
     config.set_last_sync_at(now)

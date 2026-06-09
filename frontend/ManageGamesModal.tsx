@@ -31,7 +31,6 @@ const ManageGamesModal = ({ managedShortcuts, onApply, closeModal }: ManageGames
     );
     const [iconDataUrls, setIconDataUrls] = useState<Record<string, string>>({});
 
-    // Preload icons – update state as each one finishes
     useEffect(() => {
         const loadIcons = async () => {
             for (const item of managedShortcuts) {
@@ -169,7 +168,6 @@ const ManageGamesModal = ({ managedShortcuts, onApply, closeModal }: ManageGames
                         </div>
                     </div>
 
-                    {/* Clamped game list – no double scroll */}
                     <div style={{ maxHeight: '320px', overflowY: 'auto', marginTop: 4 }}>
                         <div style={{ display: 'grid', gap: 6 }}>
                             {filtered.length === 0 ? (

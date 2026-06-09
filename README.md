@@ -14,6 +14,8 @@ Automatically add your UWP (Microsoft Store) and XBOX app games to Steam as nati
 
 > Please note that this plugin is windows only.
 
+<img width="1874" height="909" alt="image" src="https://github.com/user-attachments/assets/d14bb11f-da53-4cff-8702-20173a1b6fef" />
+
 ## Usage
 
 Once installed, most things work out of the box - but you can enable/disable things in Steam -> Millennium Library Manager -> UWP & XBOX Library Sync
@@ -23,6 +25,8 @@ Once installed, most things work out of the box - but you can enable/disable thi
 - **Relaunch Steam** - Restart Steam (useful after a sync to refresh the library).
 - **Default DisableList** - Toggle the built‑in blocklist on/off.
 - **Auto Resync on Startup** - Enable/disable automatic syncing when Steam starts.
+
+<img width="1874" height="909" alt="plugin_settings" src="https://github.com/user-attachments/assets/e173fab8-4d93-4d96-9303-ec0a689c5952" />
 
 ## Notes & Limitations
 

@@ -16,6 +16,50 @@ Automatically add your UWP (Microsoft Store) and XBOX app games to Steam as nati
 
 <img width="1874" height="909" alt="image" src="https://github.com/user-attachments/assets/d14bb11f-da53-4cff-8702-20173a1b6fef" />
 
+## Installation from this fork
+
+Download **uwp-library-sync-windows-latest** from the latest successful
+[Build and package workflow](https://github.com/cciacona/millennium-uwp-library-sync/actions/workflows/build.yml).
+The artifact is an installable ZIP; GitHub's **Code > Download ZIP** is a source
+archive and does not contain the compiled frontend.
+
+1. Exit Steam completely.
+2. Extract the ZIP's `__uwp_library_sync__` folder into your Steam installation's
+   `millennium/plugins` directory. For the default Windows installation this is
+   `C:\Program Files (x86)\Steam\millennium\plugins`.
+3. Check that `__uwp_library_sync__/plugin.json`, `backend/main.lua`, and
+   `.millennium/Dist/index.js` are present without an extra enclosing folder.
+4. Start Steam and enable **UWP & XBOX Library Sync** in Millennium's plugin
+   settings. Use **Resync Library**, then restart Steam to load the shortcuts.
+
+### About issue #1: "Invalid Build"
+
+Millennium's installer displays **Invalid Build** when the plugin catalog has
+no successful downloadable build. It is not a check of the Windows version or
+build number. The catalog installs dependencies with `NODE_ENV=production`, so
+the compiler and its type definitions must be in `dependencies` rather than
+`devDependencies`. This fork includes that fix and verifies production builds
+on Windows and Linux, preserving `.millennium/Dist/index.js` in its downloads.
+The application-discovery script does not impose a Windows build-number allowlist.
+
+The upstream catalog entry still points to the upstream repository. Installing
+this fork's ZIP uses the corrected build; changes here do not automatically
+update that catalog entry or fix Millennium's separate error-dialog behavior.
+
+### Building from source
+
+With Node.js 20 or later installed, run:
+
+```powershell
+npm install --omit=dev
+npm test
+npm run build
+npm run package
+```
+
+Copy `dist/__uwp_library_sync__` into Steam's `millennium/plugins` directory.
+The packaging command refuses to produce a package without a compiled frontend.
+
 ## Usage
 
 Once installed, most things work out of the box - but you can enable/disable things in Steam -> Millennium Library Manager -> UWP & XBOX Library Sync

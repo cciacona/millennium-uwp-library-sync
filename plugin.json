@@ -5,5 +5,5 @@
 	"description": "Allows you to automatically add your UWP & XBOX (app) games to Steam.",
 	"backendType": "lua",
 	"useBackend": true,
-	"version": "0.0.1"
+	"version": "0.0.2"
 }
